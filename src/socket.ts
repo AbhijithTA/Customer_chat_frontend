@@ -1,8 +1,10 @@
-import { io } from 'socket.io-client';
+import { io } from "socket.io-client";
 
-const socket = io('http://localhost:7777', {
+const socket = io(process.env.REACT_APP_API_URL, {
+  transports: ["websocket", "polling"], 
+  reconnectionAttempts: 5,
+  reconnectionDelay: 1000,
   withCredentials: true,
-  transports: ['websocket'],
 });
 
 export default socket;
