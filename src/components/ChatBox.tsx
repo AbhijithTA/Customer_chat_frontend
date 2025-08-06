@@ -77,9 +77,9 @@ const ChatBox = ({ ticketId }: ChatBoxProps) => {
 
     const handleIncoming = (msg: MessageType) => {
       if (!fetched || msg.ticketId !== ticketId) return;
-      if (msg.sender._id === user?._id) {
-        return;
-      }
+      // if (msg.sender._id === user?._id) {
+      //   return;
+      // }
 
       setMessages(prev => {
         const exists = prev.some(m => m._id === msg._id);
