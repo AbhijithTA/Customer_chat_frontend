@@ -7,6 +7,12 @@
 This is the **frontend** for the real-time customer support chat system built with **React**, **TypeScript**, **Tailwind CSS**, and **Socket.IO**. It connects seamlessly with the backend to enable multi-role functionality (Customer, Agent, Admin) for real-time ticket management and support communication.
 
 ---
+🌐 Live Demo
+👉 https://customer-chat-frontend.vercel.app/
+
+⚠️ Note: The backend server is hosted on Render's free tier, so it may take 20–30 seconds to respond when idle. Please be patient on first load.
+---
+
 
 ## 🚀 Features
 
