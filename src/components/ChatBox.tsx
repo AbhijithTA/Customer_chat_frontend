@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import socket from '../socket';
-import axios from 'axios';
 import api from '../api/axios';
 
 type MessageType = {
@@ -20,16 +20,16 @@ type ChatBoxProps = {
 };
 
 const ChatBox = ({ ticketId }: ChatBoxProps) => {
+  const { user } = useAuth();
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [newMessage, setNewMessage] = useState('');
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
     socket.emit('joinRoom', ticketId);
 
     const fetchMessages = async () => {
       try {
-       const res = await api.get(`/messages/${ticketId}`);
+        const res = await api.get(`/messages/${ticketId}`);
         setMessages(res.data);
       } catch (err) {
         console.error('Failed to load messages', err);
@@ -50,21 +50,20 @@ const ChatBox = ({ ticketId }: ChatBoxProps) => {
       socket.emit('leaveRoom', ticketId);
       socket.off('newMessage', handleIncoming);
     };
-  }, [ticketId, token]);
+  }, [ticketId]);
 
   const handleSend = async () => {
     if (!newMessage.trim()) return;
 
     try {
-      const res = await axios.post(
-        'http://localhost:5000/api/messages',
-        { ticketId, message: newMessage },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const res = await api.post('/messages', { ticketId, message: newMessage });
 
-      socket.emit('sendMessage', { ticketId, message: newMessage, sender: res.data.sender });
+      // Add to local state
+      setMessages((prev) => [...prev, res.data]);
+
+      // Emit to others
+      socket.emit('sendMessage', res.data);
+
       setNewMessage('');
     } catch (err) {
       console.error('Failed to send message', err);
@@ -77,7 +76,7 @@ const ChatBox = ({ ticketId }: ChatBoxProps) => {
 
       <div className="h-60 overflow-y-auto flex flex-col gap-2 px-2">
         {messages.map((msg, idx) => {
-          const isOwn = msg.sender?.role === 'agent' || msg.sender?.name === 'You';
+          const isOwn = user && msg.sender?._id === user._id;
 
           return (
             <div

@@ -95,7 +95,7 @@ export default function DashboardCustomer() {
         ))}
       </div>
 
-      {/* Chat Box */}
+     
       {activeChat && (
         <div className="mt-8">
           <h2 className="text-xl font-bold text-white mb-2">💬 Chat for Ticket</h2>

@@ -19,7 +19,7 @@ export default function DashboardAgent() {
   const fetchTickets = async () => {
     try {
       const res = await api.get('/tickets/assigned');
-      setTickets(res.data);
+      setTickets(res.data.tickets);
     } catch (err) {
       console.error('Error fetching assigned tickets:', err);
     }
