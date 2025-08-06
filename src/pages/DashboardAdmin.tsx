@@ -329,18 +329,7 @@ export default function DashboardAdmin() {
                         )}
                         Resolve
                       </button>
-                      <button
-                        onClick={() => updateStatus(ticket._id, 'closed')}
-                        disabled={updatingStatus.has(ticket._id) || ticket.status.toLowerCase() === 'closed'}
-                        className="flex-1 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2"
-                      >
-                        {updatingStatus.has(ticket._id) ? (
-                          <span className="animate-spin">⏳</span>
-                        ) : (
-                          <span>🔒</span>
-                        )}
-                        Close
-                      </button>
+
                     </div>
                   </div>
                 ))}
