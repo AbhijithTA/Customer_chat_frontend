@@ -77,6 +77,9 @@ const ChatBox = ({ ticketId }: ChatBoxProps) => {
 
     const handleIncoming = (msg: MessageType) => {
       if (!fetched || msg.ticketId !== ticketId) return;
+      if (msg.sender._id === user?._id) {
+        return;
+      }
 
       setMessages(prev => {
         const exists = prev.some(m => m._id === msg._id);
@@ -139,27 +142,36 @@ const ChatBox = ({ ticketId }: ChatBoxProps) => {
   }, [isTyping, ticketId, user?._id, user?.name]);
 
 
-  const handleSend = async () => {
+  const handleSend = () => {
     if (!newMessage.trim() || sending) return;
 
-    const messageText = newMessage.trim();
+    const text = newMessage.trim();
     setSending(true);
     setIsTyping(false);
 
-    try {
-      const res = await api.post('/messages', { ticketId, message: messageText });
+    socket.emit(
+      'sendMessage',
+      {
+        ticketId,
+        sender: user?._id,
+        message: text,
+      },
+      (response: MessageType | { error: string }) => {
+        // 1. Turn off spinner
+        setSending(false);
 
-      // ✅ Don't manually add to messages here!
-      socket.emit('sendMessage', res.data);
+        // 2. Handle an error ack
+        if ('error' in response) {
+          setError(response.error);
+          return;
+        }
 
-      setNewMessage('');
-      inputRef.current?.focus();
-    } catch (err) {
-      console.error('Failed to send message', err);
-      setError('Failed to send message. Please try again.');
-    } finally {
-      setSending(false);
-    }
+
+        // 4. Clear input & refocus
+        setNewMessage('');
+        inputRef.current?.focus();
+      }
+    );
   };
 
 
@@ -187,7 +199,6 @@ const ChatBox = ({ ticketId }: ChatBoxProps) => {
 
   return (
     <div className="flex flex-col h-full bg-gray-100 rounded-lg overflow-hidden">
-      {/* Chat Header */}
       <div className="bg-blue-600 text-white p-4">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-semibold">Support Ticket Chat</h2>
@@ -199,8 +210,6 @@ const ChatBox = ({ ticketId }: ChatBoxProps) => {
           </div>
         </div>
       </div>
-
-      {/* Messages Area */}
       <div className="flex-1 p-4 overflow-auto bg-white">
         <div className="space-y-3">
           {messages.map((msg) => {
@@ -230,7 +239,6 @@ const ChatBox = ({ ticketId }: ChatBoxProps) => {
             );
           })}
 
-          {/* Typing Indicator */}
           {typingUsers.length > 0 && (
             <div className="text-sm text-gray-500 italic">
               {typingUsers.join(', ')} {typingUsers.length > 1 ? 'are' : 'is'} typing...
@@ -240,7 +248,6 @@ const ChatBox = ({ ticketId }: ChatBoxProps) => {
         </div>
       </div>
 
-      {/* Input Area */}
       <div className="border-t p-4 bg-gray-50">
         {error && (
           <div className="mb-2 p-2 bg-red-100 text-red-700 rounded text-sm">

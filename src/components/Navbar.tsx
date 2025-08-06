@@ -49,9 +49,8 @@ export default function Navbar() {
   return (
     <nav className="bg-slate-900/95 backdrop-blur-lg border-b border-slate-800/50 text-white px-6 py-4 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="flex items-center gap-3 group transition-all duration-200"
         >
           <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-200">
@@ -61,19 +60,16 @@ export default function Navbar() {
             HelpDesk
           </span>
         </Link>
-
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
           {user ? (
             <>
-              {/* Dashboard Link */}
-              <Link 
+
+              <Link
                 to={getDashboardPath()}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  isActive(getDashboardPath())
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isActive(getDashboardPath())
                     ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                     : 'text-gray-300 hover:text-white hover:bg-slate-800/50'
-                }`}
+                  }`}
               >
                 {user.role === 'customer' && (
                   <>
@@ -95,9 +91,9 @@ export default function Navbar() {
                 )}
               </Link>
 
-              {/* User Profile Section */}
+
               <div className="flex items-center gap-4">
-                {/* User Badge */}
+
                 <div className={`flex items-center gap-2 px-3 py-2 rounded-lg border ${getRoleColor(user.role)}`}>
                   <span>{getRoleIcon(user.role)}</span>
                   <span className="text-sm font-medium">Hi, {user.name}</span>
@@ -106,7 +102,7 @@ export default function Navbar() {
                   </span>
                 </div>
 
-                {/* Logout Button */}
+
                 <button
                   onClick={handleLogout}
                   className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white rounded-lg text-sm font-medium transition-all duration-200 hover:shadow-lg hover:shadow-red-500/25"
@@ -118,21 +114,19 @@ export default function Navbar() {
             </>
           ) : (
             <div className="flex items-center gap-4">
-              <Link 
-                to="/login" 
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  isActive('/login')
+              <Link
+                to="/login"
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isActive('/login')
                     ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                     : 'text-gray-300 hover:text-white hover:bg-slate-800/50'
-                }`}
+                  }`}
               >
                 Login
               </Link>
-              <Link 
-                to="/signup" 
-                className={`px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg text-sm font-medium transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/25 ${
-                  isActive('/signup') ? 'ring-2 ring-blue-500/50' : ''
-                }`}
+              <Link
+                to="/signup"
+                className={`px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg text-sm font-medium transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/25 ${isActive('/signup') ? 'ring-2 ring-blue-500/50' : ''
+                  }`}
               >
                 Sign Up
               </Link>
@@ -140,7 +134,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="md:hidden w-10 h-10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
@@ -153,12 +147,12 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+
       <div className={`md:hidden transition-all duration-200 ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
         <div className="pt-4 pb-2 border-t border-slate-800/50 mt-4">
           {user ? (
             <div className="space-y-3">
-              {/* User Info Mobile */}
+
               <div className={`flex items-center gap-3 p-3 rounded-lg border ${getRoleColor(user.role)}`}>
                 <span className="text-2xl">{getRoleIcon(user.role)}</span>
                 <div>
@@ -167,15 +161,13 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {/* Dashboard Link Mobile */}
-              <Link 
+              <Link
                 to={getDashboardPath()}
                 onClick={() => setIsMenuOpen(false)}
-                className={`flex items-center gap-3 p-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  isActive(getDashboardPath())
+                className={`flex items-center gap-3 p-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive(getDashboardPath())
                     ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                     : 'text-gray-300 hover:text-white hover:bg-slate-800/50'
-                }`}
+                  }`}
               >
                 {user.role === 'customer' && (
                   <>
@@ -197,7 +189,6 @@ export default function Navbar() {
                 )}
               </Link>
 
-              {/* Logout Button Mobile */}
               <button
                 onClick={handleLogout}
                 className="w-full flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white rounded-lg text-sm font-medium transition-all duration-200"
@@ -208,23 +199,21 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="space-y-3">
-              <Link 
+              <Link
                 to="/login"
                 onClick={() => setIsMenuOpen(false)}
-                className={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  isActive('/login')
+                className={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive('/login')
                     ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                     : 'text-gray-300 hover:text-white hover:bg-slate-800/50'
-                }`}
+                  }`}
               >
                 Login
               </Link>
-              <Link 
+              <Link
                 to="/signup"
                 onClick={() => setIsMenuOpen(false)}
-                className={`block p-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg text-sm font-medium text-center transition-all duration-200 ${
-                  isActive('/signup') ? 'ring-2 ring-blue-500/50' : ''
-                }`}
+                className={`block p-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg text-sm font-medium text-center transition-all duration-200 ${isActive('/signup') ? 'ring-2 ring-blue-500/50' : ''
+                  }`}
               >
                 Sign Up
               </Link>

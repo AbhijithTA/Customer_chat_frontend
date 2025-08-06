@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import api from '../api/axios';
 
-// Define the shape of your user object
 export type UserPayload = {
   _id: string;
   name: string;
@@ -9,7 +8,7 @@ export type UserPayload = {
   role: 'customer' | 'agent' | 'admin';
 };
 
-// Define the context type
+
 type AuthContextType = {
   user: UserPayload | null;
   loading: boolean;
@@ -20,12 +19,12 @@ type AuthContextType = {
 // Create context
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// AuthProvider component
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<UserPayload | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Function to fetch user from backend
+
   const fetchUser = async (): Promise<UserPayload | null> => {
     try {
       const res = await api.get('/auth/me'); 
@@ -40,12 +39,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    fetchUser(); // On initial load
+    fetchUser(); 
   }, []);
 
   const logout = () => {
     setUser(null);
-    // You can optionally call a /logout API route here to clear cookies server-side
   };
 
   return (
@@ -55,7 +53,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Custom hook for consuming the context
+
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) throw new Error('useAuth must be used within an AuthProvider');

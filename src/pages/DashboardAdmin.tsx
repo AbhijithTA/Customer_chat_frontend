@@ -55,7 +55,7 @@ export default function DashboardAdmin() {
     setAssigningTickets(prev => new Set(prev).add(ticketId));
     try {
       await api.post('/tickets/assign', { ticketId, agentId });
-      await fetchTickets(); // Refresh
+      await fetchTickets(); 
     } catch (err) {
       console.error('Failed to assign ticket', err);
       setError('Failed to assign ticket. Please try again.');

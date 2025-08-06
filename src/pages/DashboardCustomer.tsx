@@ -141,7 +141,6 @@ export default function DashboardCustomer() {
     <Navbar/>
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-zinc-900 to-slate-900 p-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
@@ -154,7 +153,6 @@ export default function DashboardCustomer() {
           <p className="text-gray-400 ml-13">Create and manage your support requests</p>
         </div>
 
-        {/* Error Messages */}
         {error && (
           <div className="mb-6 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
             <div className="flex items-center gap-2">
@@ -184,8 +182,6 @@ export default function DashboardCustomer() {
             </div>
           </div>
         )}
-
-        {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-xl p-4">
             <div className="flex items-center gap-3">
@@ -242,7 +238,6 @@ export default function DashboardCustomer() {
           </div>
         </div>
 
-        {/* Create Ticket Form */}
         <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-xl p-6 mb-8">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-2xl">✍️</span>
@@ -314,7 +309,6 @@ export default function DashboardCustomer() {
           </div>
         </div>
 
-        {/* Tickets Section */}
         <div className="mb-8">
           <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
             <span>📨</span>
@@ -355,13 +349,13 @@ export default function DashboardCustomer() {
                     </div>
                   </div>
 
-                  {/* Ticket ID */}
+           
                   <div className="mb-4 p-3 bg-slate-700/30 rounded-lg">
                     <p className="text-xs text-gray-400 mb-1">Ticket ID</p>
                     <p className="text-sm font-mono text-gray-300">#{ticket._id.slice(-8).toUpperCase()}</p>
                   </div>
 
-                  {/* Message Preview */}
+
                   <div className="mb-4 p-3 bg-slate-700/20 rounded-lg">
                     <p className="text-xs text-gray-400 mb-1">Message</p>
                     <p className="text-sm text-gray-300 line-clamp-3">
@@ -369,7 +363,7 @@ export default function DashboardCustomer() {
                     </p>
                   </div>
 
-                  {/* Chat Button */}
+               
                   <button
                     onClick={() => setActiveChat(ticket._id)}
                     className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2"
@@ -383,7 +377,7 @@ export default function DashboardCustomer() {
           )}
         </div>
 
-        {/* Chat Section */}
+    
         {activeChat && (
           <div className="bg-slate-800/30 backdrop-blur border border-slate-700/50 rounded-xl p-6">
             <div className="flex items-center justify-between mb-4">

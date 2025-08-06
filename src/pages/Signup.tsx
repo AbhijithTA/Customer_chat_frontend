@@ -57,16 +57,16 @@ export default function Signup() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        {/* Branding Section */}
+        
         <div className="md:w-1/2 p-6 text-center">
           <h1 className="text-3xl font-bold mb-2">Create your HelpDesk account</h1>
           <p className="text-zinc-400 mb-4">
             Track issues, talk to support agents, and resolve queries faster.
           </p>
-          <img src="/assets/Security-cuate.svg" alt="Illustration" className="w-64 mx-auto" />
+          
         </div>
 
-        {/* Signup Form */}
+       
         <div className="md:w-1/2 w-full max-w-md bg-zinc-800 p-6 rounded-lg shadow">
           <form onSubmit={handleSubmit} className="space-y-4">
             <h2 className="text-xl font-semibold">Sign Up</h2>

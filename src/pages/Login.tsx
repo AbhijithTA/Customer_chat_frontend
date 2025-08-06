@@ -39,7 +39,6 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-zinc-900 to-slate-900 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
@@ -52,10 +51,10 @@ export default function Login() {
           <p className="text-gray-400">Sign in to your account</p>
         </div>
 
-        {/* Login Form */}
+   
         <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-2xl p-8 shadow-2xl">
           <form onSubmit={handleLogin} className="space-y-6">
-            {/* Error Message */}
+    
             {error && (
               <div className="p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
                 <div className="flex items-center gap-2">
@@ -65,7 +64,6 @@ export default function Login() {
               </div>
             )}
 
-            {/* Email Field */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Email Address
@@ -81,7 +79,7 @@ export default function Login() {
               />
             </div>
 
-            {/* Password Field */}
+         
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Password
@@ -97,7 +95,7 @@ export default function Login() {
               />
             </div>
 
-            {/* Login Button */}
+    
             <button
               type="submit"
               disabled={loading}
@@ -117,7 +115,7 @@ export default function Login() {
             </button>
           </form>
 
-          {/* Sign Up Link */}
+    
           <div className="mt-6 pt-6 border-t border-slate-700/50 text-center">
             <p className="text-gray-400 text-sm">
               Don't have an account?{' '}
@@ -131,7 +129,7 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Demo Credentials */}
+     
         <div className="mt-6 p-4 bg-slate-800/30 border border-slate-700/30 rounded-lg">
           <p className="text-xs text-gray-400 text-center mb-2">Demo Credentials</p>
           <div className="text-xs text-gray-500 space-y-1">
